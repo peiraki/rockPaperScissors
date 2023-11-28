@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jrani</title>
+    <style>
+        body {
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+        }
+        .player {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            min-height: 170px;
+        }
+        .myplace{
+            background-color: rgb(2, 41, 41);
+            width: 700px;
+            display: flex;
+            justify-content: center;
+        }
+        .myplace div {
+            background-color: rgb(255, 87, 21);
+            border-radius: 50%;
+            transition: .4s;
+        }
+        .myplace div:hover {
+            transform: scale(1.1);
+        }
+        .compplace {
+            background-color: rgb(123, 13, 250);
+            width: 700px;
+            display: flex;
+            justify-content: center;
+        }
+        .option {
+            padding: 10px;
+            margin: 30px;
+            font-size: 5rem;
+            cursor: pointer;
+        }
+        .C-option {
+            margin:30px;
+            font-size: 5rem;
+        }
+        .playerr {
+            font-size: 2rem;
+            font-weight: bold;
+            color:rgb(158, 65, 122);
+        }
+        .result {
+            display: flex;
+            justify-content: center;
+            gap:20px;
+            font-size: 2rem;
+        }
+        .resultname {
+            text-align: center;
+            font-size: 2rem;
+        }
+        .resultname::before {
+            content: 'shedegi:';
+            
+        }
+        .fullscreen, .fullscreen2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 50px;
+            font-family: cursive;
+            text-shadow: 0 0 5px rgb(255, 0, 140);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top:0;
+            background-color: rgba(0, 255, 255, 0.664);
+            animation: mogeba 1s linear;
+            animation-fill-mode: forwards;
+            transition: 1s;
+            transform: scale(0);
+            display: none;
+        }
+        @keyframes mogeba {
+            to{
+                transform: scale(1) rotate(720deg);
+            }
+        }
+        @media (max-width: 710px) {
+            body {
+                transform-origin: top;
+                transform: scale(0.5);
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fullscreen">Congrulation!!! <br>You Win!!!
+        <button class="retrybtn" onclick="reload()">თავიდან თამაში</button>
+    </div>
+    <div class="fullscreen2">Don't Worry!!! <br>Try Again
+        <button class="retrybtn" onclick="reload2()">თავიდან თამაში</button>
+    </div>
+    <div class="playerr">My Move:</div>
+    <div class="player myplace">
+        <div onclick="optOne()" class="option option1">✊🏻</div>
+        <div onclick="optTwo()" class="option option2">✌🏻</div>
+        <div onclick="optThree()" class="option option3">🤚🏻</div>
+    </div>
+    <div class="playerr">Computer:</div>
+    <div class="player compplace">
+        <div class="C-option"></div>
+    </div>
+    <div class="result">
+       <label>My Points:</label> <div class="mycount">0</div>
+        <label>Computer Points:</label><div class="compcount">0</div>
+    </div>
+</body>
+<script>
+    let opt1 = document.querySelector('.option1'),
+        opt2 = document.querySelector('.option2'),
+        opt3 = document.querySelector('.option3'),
+        resultName = document.querySelector('.resultname'),
+        count11 = document.querySelector('.mycount'),
+        count22 = document.querySelector('.compcount'),
+        fullScreen = document.querySelector('.fullscreen'),
+        fullScreen2 = document.querySelector('.fullscreen2')
+
+        count1 = 0
+        countTwo = 0
+        opt1 = "✊🏻"
+        opt2 = "✌🏻"
+        opt3 = "🤚🏻"
+    let cOption = document.querySelector('.C-option')
+        console.log(opt1,opt2, opt3)
+        let option   
+        let randomA = ["✊🏻", "✌🏻", "🤚🏻"],
+            index = randomA.length
+        let rand
+        function optOne(){
+            rand = Math.floor(Math.random() * index)    
+            option = opt1
+            cOption.innerText = randomA[rand]
+            if(randomA[rand] === opt1){
+            }else if(randomA[rand] === opt2){
+                count1++
+                count11.innerText = count1
+            }else if(randomA[rand] === opt3){
+                countTwo++
+                count22.innerText = countTwo
+            }
+            if(count1 > 9){
+                console.log("moige")
+                fullScreen.style.display = "flex"
+            }else if(countTwo > 9) {
+                console.log("waage")
+                fullScreen2.style.display = "flex"
+            }
+        }
+        function optTwo(){
+            option = opt2
+            rand = Math.floor(Math.random() * index)  
+            cOption.innerText = randomA[rand]
+            if(randomA[rand] === opt1){
+                countTwo++
+                count22.innerText = countTwo
+            }else if(randomA[rand] === opt2){
+            }else if(randomA[rand] === opt3){
+                count1++
+                count11.innerText = count1
+            }
+            if(count1 > 9){
+                console.log("moige")
+                fullScreen.style.display = "flex"
+            }else if(countTwo > 9) {
+                console.log("waage")
+                fullScreen2.style.display = "flex"
+            }
+           
+        }
+        function optThree(){
+            option = opt3
+            rand = Math.floor(Math.random() * index)  
+            cOption.innerText = randomA[rand]
+            if(randomA[rand] === opt1){
+                count1++
+                count11.innerText = count1
+            }else if(randomA[rand] === opt2){
+                countTwo++
+                count22.innerText = countTwo
+            }else if(randomA[rand] === opt3){
+            }
+            if(count1 > 9){
+                console.log("moige")
+                fullScreen.style.display = "flex"
+            }else if(countTwo > 9) {
+                console.log("waage")
+                fullScreen2.style.display = "flex"
+            }
+        }
+        function reload() {
+            location.reload(); 
+        }
+        function reload2() {
+            location.reload(); 
+        }
+       
+</script>
+</html>
